@@ -24,6 +24,7 @@ public class DriveTrain extends Subsystem implements RobotMap{
 	private WPI_TalonSRX middleLeft, middleRight;
 	WPI_TalonSRX backLeft;
 	private WPI_TalonSRX backRight;
+	Accelerometer accel;
 
 	private AHRS gyro;
 	
@@ -48,6 +49,9 @@ public class DriveTrain extends Subsystem implements RobotMap{
 		backRight = new WPI_TalonSRX(DT_RIGHT_3);
 		driveSwitch = new DoubleSolenoid(PCM, DT_SOLENOID_0, DT_SOLENOID_1);
 		gyro = new AHRS(Port.kMXP);
+		accel = new BuiltInAccelerometer(); 
+		accel = new BuiltInAccelerometer(Accelerometer.Range.k4G);
+		
 		setFollower();
 	}
 	public void setFollower(){
@@ -63,7 +67,16 @@ public class DriveTrain extends Subsystem implements RobotMap{
 		SmartDashboard.putNumber("Accel X", gyro.getWorldLinearAccelX());
 		SmartDashboard.putNumber("Accel Y", gyro.getWorldLinearAccelY());
 		SmartDashboard.putNumber("Accel Z", gyro.getWorldLinearAccelZ());
-
+		
+		// navx displacement values
+		SmartDashboard.putNumber("Displacement X", gyro.getDisplacementX());
+		SmartDashboard.putNumber("Displacement Y", gyro.getDisplacementY());
+		SmartDashboard.putNumber("Displacement Z", gyro.getDisplacementZ());
+		
+		// roboRio accelerometer values
+		SmartDashboard.putNumber("Accelerometer X", accel.getX());
+		SmartDashboard.putNumber("Accelerometer Y", accel.getY());
+		SmartDashboard.putNumber("Accelerometer Z", accel.getZ());
 	}
 
 	public void setOff() {
