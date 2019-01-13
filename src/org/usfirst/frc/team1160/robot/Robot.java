@@ -7,6 +7,9 @@
 
 package org.usfirst.frc.team1160.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -29,10 +32,12 @@ public class Robot extends TimedRobot implements RobotMap{
 	public Command autonomousCommand;
 	public static DriveTrain dt;
 	public static Testbed tb;
-
+	public static NetworkTable table;
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
+	NetworkTableEntry xEntry;
+	NetworkTableEntry yEntry;
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -42,14 +47,20 @@ public class Robot extends TimedRobot implements RobotMap{
 		dt = DriveTrain.getInstance();
 		tb = Testbed.getInstance();
 		oi = OI.getInstance();
+		NetworkTableInstance inst = NetworkTableInstance.getDefault();
+		table = inst.getTable("datatable");
+		xEntry = table.getEntry("X");
+		yEntry = table.getEntry("Y");
 	}
-
+	double x = 0;
+	double y = 0;
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
 	 * the robot is disabled.
 	 */
 	@Override
+	
 	public void disabledInit() {
 
 	}
@@ -113,6 +124,10 @@ public class Robot extends TimedRobot implements RobotMap{
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		xEntry.setDouble(x);
+		yEntry.setDouble(y);
+		x += 0.05;
+		y += 0.1;
 	}
 
 	/**
