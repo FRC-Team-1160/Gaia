@@ -126,7 +126,7 @@ public class Robot extends TimedRobot implements RobotMap{
 		Scheduler.getInstance().run();
 		xEntry.setDouble(x);
 		yEntry.setDouble(y);
-		x += 0.05;
+		x = ;
 		y += 0.1;
 	}
 

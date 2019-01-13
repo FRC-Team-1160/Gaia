@@ -8,6 +8,9 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SerialPort.Port;
@@ -29,6 +32,14 @@ public class DriveTrain extends Subsystem implements RobotMap{
 	
 	private DoubleSolenoid driveSwitch;
 	
+	public static NetworkTable table;
+	
+	NetworkTableEntry xEntry;
+	NetworkTableEntry yEntry;
+	
+	double x = 0;
+	double y = 0;
+	
 	public static DriveTrain getInstance()
 	{
 
@@ -48,6 +59,10 @@ public class DriveTrain extends Subsystem implements RobotMap{
 		backRight = new WPI_TalonSRX(DT_RIGHT_3);
 		driveSwitch = new DoubleSolenoid(PCM, DT_SOLENOID_0, DT_SOLENOID_1);
 		gyro = new AHRS(Port.kMXP);
+		NetworkTableInstance inst = NetworkTableInstance.getDefault();
+		table = inst.getTable("datatable");
+		xEntry = table.getEntry("X");
+		yEntry = table.getEntry("Y");
 		setFollower();
 	}
 	public void setFollower(){
