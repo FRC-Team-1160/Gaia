@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import com.kauailabs.navx.frc.AHRS;
+//import com.kauailabs.navx.frc.AHRS;
 
 public class DriveTrain extends Subsystem implements RobotMap{
 	
@@ -25,7 +25,7 @@ public class DriveTrain extends Subsystem implements RobotMap{
 	WPI_TalonSRX backLeft;
 	private WPI_TalonSRX backRight;
 
-	private AHRS gyro;
+	//private AHRS gyro;
 	
 	private DoubleSolenoid driveSwitch;
 	
@@ -47,7 +47,7 @@ public class DriveTrain extends Subsystem implements RobotMap{
 		middleRight = new WPI_TalonSRX(DT_RIGHT_2);
 		backRight = new WPI_TalonSRX(DT_RIGHT_3);
 		driveSwitch = new DoubleSolenoid(PCM, DT_SOLENOID_0, DT_SOLENOID_1);
-		gyro = new AHRS(Port.kMXP);
+//		gyro = new AHRS(Port.kMXP);
 		setFollower();
 	}
 	public void setFollower(){
@@ -59,10 +59,10 @@ public class DriveTrain extends Subsystem implements RobotMap{
 	public void manualDrive(){
 		backLeft.set(ControlMode.PercentOutput, (Math.pow(-(Robot.oi.getMainstick().getZ() - Robot.oi.getMainstick().getY()), 1)));
 		backRight.set(ControlMode.PercentOutput, Math.pow(-(Robot.oi.getMainstick().getZ() + Robot.oi.getMainstick().getY()), 1));
-		SmartDashboard.putNumber("Angle", gyro.getAngle());
-		SmartDashboard.putNumber("Accel X", gyro.getWorldLinearAccelX());
-		SmartDashboard.putNumber("Accel Y", gyro.getWorldLinearAccelY());
-		SmartDashboard.putNumber("Accel Z", gyro.getWorldLinearAccelZ());
+//		SmartDashboard.putNumber("Angle", gyro.getAngle());
+//		SmartDashboard.putNumber("Accel X", gyro.getWorldLinearAccelX());
+//		SmartDashboard.putNumber("Accel Y", gyro.getWorldLinearAccelY());
+//		SmartDashboard.putNumber("Accel Z", gyro.getWorldLinearAccelZ());
 
 	}
 
