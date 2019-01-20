@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package org.usfirst.frc.team1160.robot;
-
+import org.usfirst.frc.team1160.robot.Robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -15,6 +15,7 @@ import org.usfirst.frc.team1160.robot.commands.Testbed.ExtendPiston;
 import org.usfirst.frc.team1160.robot.commands.Testbed.RetractPiston;
 import org.usfirst.frc.team1160.robot.commands.drive.*;
 import org.usfirst.frc.team1160.robot.commands.vision.runVision;
+import org.usfirst.frc.team1160.robot.commands.Auto.TurnAngle;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -23,7 +24,7 @@ import org.usfirst.frc.team1160.robot.commands.vision.runVision;
 public class OI implements RobotMap{
 	private static OI instance;
 	Joystick mainStick;
-	JoystickButton setOn, setOff,extendPiston,retractPiston, runVision;
+	JoystickButton setOn, setOff,extendPiston,retractPiston, runVision,turnToVisionAngle;
 	
 	public static OI getInstance() {
 		if(instance == null) {
@@ -40,7 +41,7 @@ public class OI implements RobotMap{
 	private void createButtons() {
 		// TODO Auto-generated method stub
 		runVision = new JoystickButton(mainStick, 1);
-		
+		turnToVisionAngle = new JoystickButton(mainStick,2);
 		setOn = new JoystickButton(mainStick, 3);
 		setOff = new JoystickButton(mainStick, 4);
 		extendPiston = new JoystickButton(mainStick,6);
@@ -54,6 +55,8 @@ public class OI implements RobotMap{
 		//climberUp.whileHeld(new Climb(1));
 		//climberUp.whileHeld(new Climb(-1));
 		runVision.whenPressed(new runVision());
+		System.out.println("The angle is: " + Robot.vs.angleindegrees);
+		turnToVisionAngle.whenPressed(new TurnAngle(Robot.vs.angleindegrees));
 		setOn.whenPressed(new setOn());
 		setOff.whenPressed(new setOff());
 		extendPiston.whenPressed(new ExtendPiston());

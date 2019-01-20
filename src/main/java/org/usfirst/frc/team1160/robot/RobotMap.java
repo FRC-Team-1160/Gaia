@@ -24,4 +24,13 @@ public interface RobotMap {
 	public static final int DT_SOLENOID_0 = 0;
 	public static final int DT_SOLENOID_1 = 7;
 
+
+	public static final double GYRO_KP_2 = .01; //TurnAngle
+	public static final double GYRO_KI = 0;
+	public static final double GYRO_KD = .1; //0.01 * (-1.0/80.0);//TURN ANGLE KP
+	public static final double GYRO_TOLERANCE = 0.5;				//Smaller value means higher accuracy but more time spent
+	public static final double TURN_TIMEOUT = 2.5;
+																//achieving said accuracy
+	public static final double GYRO_CAP = 0.2; //max speed of the turn during TurnAngles
+
 }

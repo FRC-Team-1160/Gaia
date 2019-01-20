@@ -42,8 +42,8 @@ public class Robot extends TimedRobot implements RobotMap{
 	public void robotInit() {
 		dt = DriveTrain.getInstance();
 		tb = Testbed.getInstance();
-		oi = OI.getInstance();
 		vs = Vision.getInstance();
+		oi = OI.getInstance();
 	}
 
 	/**
