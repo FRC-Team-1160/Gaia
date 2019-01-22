@@ -119,7 +119,13 @@ public class Vision extends Subsystem {
 
 			double turnDistancePX = Math.abs(cameraCenter-midpointX);
 			double turnDistancein = (turnDistancePX*14.311)/distanceX;
-			
+			double LorR = 0;
+			if(midpointX > cameraCenter){
+				LorR = 1;
+			}
+			else{
+				LorR = -1;
+			}
 
 			double height1 = Math.abs(maxHY1-minHY1);
 			double height2 = Math.abs(maxHY2-minHY2);
@@ -129,6 +135,8 @@ public class Vision extends Subsystem {
 			double midPointHeight = (distance1 + distance2)/2;
 
 			double turnAngle = (Math.asin(turnDistancein/midPointHeight))*180/3.1415;
+			turnAngle = turnAngle * LorR;
+
 
 			System.out.println("The angle is: " + turnAngle);
 			angleindegrees = turnAngle;

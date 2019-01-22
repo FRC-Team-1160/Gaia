@@ -24,8 +24,8 @@ public class TurnAngle extends Command implements RobotMap{
         // eg. requires(chassis);
       requires(Robot.dt);
       requires(Robot.vs);
-      this.targetAngle = 90;
-    	//this.targetAngle = Robot.vs.angleindegrees;
+     // this.targetAngle = -15;
+    	this.targetAngle = Robot.vs.angleindegrees;
     }
 
     // Called just before this Command runs the first time

@@ -17,6 +17,7 @@ import org.usfirst.frc.team1160.robot.commands.drive.*;
 import org.usfirst.frc.team1160.robot.commands.vision.runVision;
 import org.usfirst.frc.team1160.robot.commands.Auto.TurnAngle;
 
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -24,7 +25,7 @@ import org.usfirst.frc.team1160.robot.commands.Auto.TurnAngle;
 public class OI implements RobotMap{
 	private static OI instance;
 	Joystick mainStick;
-	JoystickButton setOn, setOff,extendPiston,retractPiston, runVision,turnToVisionAngle;
+	JoystickButton setOn, setOff,extendPiston,retractPiston, runVision,turnToVisionAngle, resetYaw;
 	
 	public static OI getInstance() {
 		if(instance == null) {
@@ -46,6 +47,7 @@ public class OI implements RobotMap{
 		setOff = new JoystickButton(mainStick, 4);
 		extendPiston = new JoystickButton(mainStick,6);
 		retractPiston = new JoystickButton(mainStick,5);
+		resetYaw = new JoystickButton(mainStick, 7);
 		System.out.println("Hello");
 		tieButtons();
 	}
@@ -55,13 +57,13 @@ public class OI implements RobotMap{
 		//climberUp.whileHeld(new Climb(1));
 		//climberUp.whileHeld(new Climb(-1));
 		runVision.whenPressed(new runVision());
-		System.out.println("The angle is: " + Robot.vs.angleindegrees);
+		//System.out.println("The angle is: " + Robot.vs.angleindegrees);
 		turnToVisionAngle.whenPressed(new TurnAngle(Robot.vs.angleindegrees));
 		setOn.whenPressed(new setOn());
 		setOff.whenPressed(new setOff());
 		extendPiston.whenPressed(new ExtendPiston());
 		retractPiston.whenPressed(new RetractPiston());
-	}
+		resetYaw.whenPressed(new resetYaw());	}
 	
 	public Joystick getMainstick() {
 		return mainStick;

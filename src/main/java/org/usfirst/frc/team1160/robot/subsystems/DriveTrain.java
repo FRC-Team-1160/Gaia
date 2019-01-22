@@ -12,6 +12,7 @@ import org.usfirst.frc.team1160.robot.commands.drive.ManualDrive;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SerialPort;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -37,6 +38,10 @@ public class DriveTrain extends Subsystem implements RobotMap {
 	private double derivative;
 	private double proportion;
 	private double integral; 
+
+	//modify speed of turns w/o affecting PID
+	private double rightSideBoost;
+	private double overallBoost;
 
 	private Timer timer,timerCheck;
 		//timerCheck is supposed to run only upon the turnAngle method
@@ -68,6 +73,8 @@ public class DriveTrain extends Subsystem implements RobotMap {
 		setFollower();
 		timer = new Timer();
 		timerCheck = new Timer();
+		rightSideBoost = 1.04;
+		overallBoost = 1.01;
 	}
 	public void setFollower(){
 		frontLeft.follow(backLeft);
@@ -76,8 +83,10 @@ public class DriveTrain extends Subsystem implements RobotMap {
 		middleRight.follow(backRight);
 	}
 	public void manualDrive(){
-		backLeft.set(ControlMode.PercentOutput, (Math.pow(-(Robot.oi.getMainstick().getZ() - Robot.oi.getMainstick().getY()), 1)));
-		backRight.set(ControlMode.PercentOutput, Math.pow(-(Robot.oi.getMainstick().getZ() + Robot.oi.getMainstick().getY()), 1));
+		backLeft.set(ControlMode.PercentOutput, 0.8*(Math.pow(-(Robot.oi.getMainstick().getZ() - Robot.oi.getMainstick().getY()), 1)));
+		backRight.set(ControlMode.PercentOutput, 0.8*(Math.pow(-(Robot.oi.getMainstick().getZ() + Robot.oi.getMainstick().getY()), 1)));
+		SmartDashboard.putNumber("Yaw", gyro.getYaw());
+
 //		SmartDashboard.putNumber("Angle", gyro.getAngle());
 //		SmartDashboard.putNumber("Accel X", gyro.getWorldLinearAccelX());
 //		SmartDashboard.putNumber("Accel Y", gyro.getWorldLinearAccelY());
@@ -85,7 +94,7 @@ public class DriveTrain extends Subsystem implements RobotMap {
 	}
 
 	public void setPercentOutput(double percentOutput) {
-		backLeft.set(ControlMode.PercentOutput, -1.02*percentOutput);
+		backLeft.set(ControlMode.PercentOutput, -1 * percentOutput);
 		backRight.set(ControlMode.PercentOutput, percentOutput);
 		}
 
@@ -107,9 +116,10 @@ public class DriveTrain extends Subsystem implements RobotMap {
 		integral = 0;
 	}
 
-	public void turnAngle(double targetAngle) { //ghetto PID with the navX sensor
- 		angle_difference_now = targetAngle - gyro.getYaw();
- 		proportion = GYRO_KP_2 * angle_difference;
+	public void turnAngle(double targetAngle) { //ghetto PID with the navX sensor 
+		angle_difference_now = Math.abs(targetAngle -  gyro.getYaw());
+		SmartDashboard.putNumber("Yaw", gyro.getYaw());
+		proportion = GYRO_KP_2 * angle_difference;
  		deltaTime = getTime();
  		derivative = GYRO_KD * (angle_difference_now - angle_difference)/deltaTime;
  		//if (Math.abs(angle_difference_now) < 15) {
@@ -120,17 +130,25 @@ public class DriveTrain extends Subsystem implements RobotMap {
  		//SmartDashboard.putNumber("turnAngle PercentOutput input", proportion+derivative+integral);
  		//backLeft.set(ControlMode.PercentOutput, proportion+derivative+integral);
  		//backRight.set(ControlMode.PercentOutput, proportion+derivative+integral);
-		System.out.println("P is: \t" + proportion + "I is: \t" + integral + "D is: \t" + derivative);
-		
+		//System.out.println("P is: \t" + proportion + "I is: \t" + integral + "D is: \t" + derivative);
+		SmartDashboard.putNumber("P", proportion);
+		SmartDashboard.putNumber("I", integral);
+		SmartDashboard.putNumber("D", derivative);
 		 
-		 if (proportion+derivative+integral <= GYRO_CAP) {
-	 		backLeft.set(ControlMode.PercentOutput, proportion+derivative+integral);
-	 		backRight.set(ControlMode.PercentOutput, proportion+derivative+integral);
- 		}
- 		else {
- 			backLeft.set(GYRO_CAP);
- 			backRight.set(GYRO_CAP);
-		 }
+		// if (proportion+derivative+integral <= GYRO_CAP) {
+			 if(targetAngle > 0){
+				backLeft.set(ControlMode.PercentOutput, -1*(proportion-derivative+integral));
+	 		    backRight.set(ControlMode.PercentOutput, -1*rightSideBoost*(proportion-derivative+integral));
+			 }else{
+				backLeft.set(ControlMode.PercentOutput, (proportion-derivative+integral));
+				backRight.set(ControlMode.PercentOutput, rightSideBoost*(proportion-derivative+integral));
+			 }
+	 		
+ 	//	}
+ 	//	else {
+ 	//		backLeft.set(GYRO_CAP);
+ 	//		backRight.set(GYRO_CAP);
+	//	 }
  		
  		//printYaw();
  		resetTime();
