@@ -19,13 +19,13 @@ public class TurnAngle extends Command implements RobotMap{
 
 	public double targetAngle;
     
-	public TurnAngle(double targetAngle) {
+	public TurnAngle(double target) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
       requires(Robot.dt);
       requires(Robot.vs);
      // this.targetAngle = -15;
-    	this.targetAngle = Robot.vs.angleindegrees;
+    	this.targetAngle = target;
     }
 
     // Called just before this Command runs the first time
