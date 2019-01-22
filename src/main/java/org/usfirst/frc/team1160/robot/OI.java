@@ -25,7 +25,7 @@ import org.usfirst.frc.team1160.robot.commands.Auto.TurnAngle;
 public class OI implements RobotMap{
 	private static OI instance;
 	Joystick mainStick;
-	JoystickButton setOn, setOff,extendPiston,retractPiston, runVision,turnToVisionAngle, resetYaw;
+	JoystickButton setOn, setOff,extendPiston,retractPiston, runVision,turnToVisionAngle, yawReset, JoystickButton;
 	
 	public static OI getInstance() {
 		if(instance == null) {
@@ -47,7 +47,7 @@ public class OI implements RobotMap{
 		setOff = new JoystickButton(mainStick, 4);
 		extendPiston = new JoystickButton(mainStick,6);
 		retractPiston = new JoystickButton(mainStick,5);
-		resetYaw = new JoystickButton(mainStick, 7);
+		yawReset = new JoystickButton(mainStick, 7);
 		System.out.println("Hello");
 		tieButtons();
 	}
@@ -63,7 +63,7 @@ public class OI implements RobotMap{
 		setOff.whenPressed(new setOff());
 		extendPiston.whenPressed(new ExtendPiston());
 		retractPiston.whenPressed(new RetractPiston());
-		resetYaw.whenPressed(new resetYaw());	}
+		yawReset.whenPressed(new resetYaw());	}
 	
 	public Joystick getMainstick() {
 		return mainStick;
