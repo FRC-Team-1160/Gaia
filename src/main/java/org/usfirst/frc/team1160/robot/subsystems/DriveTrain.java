@@ -212,7 +212,6 @@ public class DriveTrain extends Subsystem implements RobotMap {
 		System.out.println(gyro.getYaw());
 		gyro.reset();
 		gyro.zeroYaw();
-		
 		System.out.println(gyro.getYaw());
 	}
 	public void zeroGyro() {
