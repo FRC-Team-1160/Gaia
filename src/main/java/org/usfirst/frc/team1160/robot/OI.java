@@ -63,7 +63,8 @@ public class OI implements RobotMap{
 		setOff.whenPressed(new setOff());
 		extendPiston.whenPressed(new ExtendPiston());
 		retractPiston.whenPressed(new RetractPiston());
-		button_ResetYaw.whenPressed(new resetYaw());	}
+		button_ResetYaw.whenPressed(new resetYaw());	
+	}
 	
 	public Joystick getMainstick() {
 		return mainStick;

@@ -73,7 +73,7 @@ public class DriveTrain extends Subsystem implements RobotMap {
 		setFollower();
 		timer = new Timer();
 		timerCheck = new Timer();
-		rightSideBoost = 1.04;
+		rightSideBoost = 1.00;
 		overallBoost = 1.01;
 	}
 	public void setFollower(){
@@ -117,14 +117,21 @@ public class DriveTrain extends Subsystem implements RobotMap {
 	}
 
 	public void turnAngle(double targetAngle) { //ghetto PID with the navX sensor 
-		angle_difference_now = Math.abs(targetAngle -  gyro.getYaw());
+		double current_angle = gyro.getYaw() + 0.1;
+		angle_difference_now = Math.abs(targetAngle - current_angle);
 		SmartDashboard.putNumber("Yaw", gyro.getYaw());
 		proportion = GYRO_KP_2 * angle_difference;
  		deltaTime = getTime();
- 		derivative = GYRO_KD * (angle_difference_now - angle_difference)/deltaTime;
+ 		//derivative = GYRO_KD * (angle_difference_now - angle_difference)/deltaTime;
  		//if (Math.abs(angle_difference_now) < 15) {
- 		integral += GYRO_KI*deltaTime*(angle_difference_now);
- 		//}
+ 		//integral += GYRO_KI*deltaTime*(angle_difference_now);
+		if(integral > GYRO_KI_CAP) {
+			
+			integral = GYRO_KI_CAP;
+		}
+		derivative = 0;
+		integral = 0;
+		 //}
  		angle_difference = angle_difference_now;
  		
  		//SmartDashboard.putNumber("turnAngle PercentOutput input", proportion+derivative+integral);
@@ -136,13 +143,13 @@ public class DriveTrain extends Subsystem implements RobotMap {
 		SmartDashboard.putNumber("D", derivative);
 		 
 		// if (proportion+derivative+integral <= GYRO_CAP) {
-			 if(targetAngle > 0){
-				backLeft.set(ControlMode.PercentOutput, -1*(proportion-derivative+integral));
-	 		    backRight.set(ControlMode.PercentOutput, -1*rightSideBoost*(proportion-derivative+integral));
-			 }else{
-				backLeft.set(ControlMode.PercentOutput, (proportion-derivative+integral));
-				backRight.set(ControlMode.PercentOutput, rightSideBoost*(proportion-derivative+integral));
-			 }
+			// if(targetAngle > 0){
+				backLeft.set(ControlMode.PercentOutput, -1*(proportion+derivative+integral));
+	 		    backRight.set(ControlMode.PercentOutput, -1*rightSideBoost*(proportion+derivative+integral));
+			 //}//else{
+			//	backLeft.set(ControlMode.PercentOutput, (proportion+derivative+integral));
+			//	backRight.set(ControlMode.PercentOutput, rightSideBoost*(proportion+derivative+integral));
+			 //}
 	 		
  	//	}
  	//	else {

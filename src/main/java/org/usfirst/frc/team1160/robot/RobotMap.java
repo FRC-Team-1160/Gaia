@@ -14,7 +14,12 @@ package org.usfirst.frc.team1160.robot;
  * floating around.
  */
 public interface RobotMap {
-	public static int DT_LEFT_1 = 1;						//Ports
+	/**
+	 *
+	 */
+
+	public static final double _0_023 = 0.023;
+	public static int DT_LEFT_1 = 1; // Ports
 	public static int DT_LEFT_2 = 2;
 	public static int DT_LEFT_3 = 3;
 	public static int DT_RIGHT_1 = 4;
@@ -23,12 +28,12 @@ public interface RobotMap {
 	public static int PCM = 10;
 	public static final int DT_SOLENOID_0 = 0;
 	public static final int DT_SOLENOID_1 = 7;
-	public static final double GYRO_KP_2 = 0.019; //TurnAngle
-	public static final double GYRO_KI = 0.00027;
-	public static final double GYRO_KD = 0.0003; //0.01 * (-1.0/80.0);//TURN ANGLE KP
+	public static final double GYRO_KP_2 = 0.04; //TurnAngle
+	public static final double GYRO_KI = 0.01;
+	public static final double GYRO_KD = 0.000001; //0.01 * (-1.0/80.0);//TURN ANGLE KP
 	public static final double GYRO_TOLERANCE = 0.5;				//Smaller value means higher accuracy but more time spent
 	public static final double TURN_TIMEOUT = 2.5;
 																//achieving said accuracy
 	public static final double GYRO_CAP = 0.5; //max speed of the turn during TurnAngles
-
+	public static final double GYRO_KI_CAP = 0.05;
 }

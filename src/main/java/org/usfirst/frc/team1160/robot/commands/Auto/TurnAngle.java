@@ -24,8 +24,8 @@ public class TurnAngle extends Command implements RobotMap{
         // eg. requires(chassis);
       requires(Robot.dt);
       requires(Robot.vs);
-     // this.targetAngle = -15;
-    	this.targetAngle = target;
+      this.targetAngle = 15;
+    	//this.targetAngle = target;
     }
 
     // Called just before this Command runs the first time
@@ -35,14 +35,15 @@ public class TurnAngle extends Command implements RobotMap{
     	Robot.dt.resetGyro();
     	Robot.dt.resetTurnAngleIntegral();
     	Robot.dt.resetTime();
-    	Robot.dt.startTime();
+      Robot.dt.startTime();
+      Robot.dt.turnAngle(targetAngle);
+
     	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     //this.targetAngle = Robot.vs.angleindegrees;
-		Robot.dt.turnAngle(targetAngle);
 		//time for the ghetto isFinished()
     }
 
