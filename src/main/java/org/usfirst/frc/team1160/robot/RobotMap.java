@@ -31,9 +31,16 @@ public interface RobotMap {
 	public static final double GYRO_KP_2 = 0.04; //TurnAngle
 	public static final double GYRO_KI = 0.01;
 	public static final double GYRO_KD = 0.000001; //0.01 * (-1.0/80.0);//TURN ANGLE KP
-	public static final double GYRO_TOLERANCE = 0.5;				//Smaller value means higher accuracy but more time spent
+	public static final double GYRO_TOLERANCE = 3;				//Smaller value means higher accuracy but more time spent
 	public static final double TURN_TIMEOUT = 2.5;
 																//achieving said accuracy
 	public static final double GYRO_CAP = 0.5; //max speed of the turn during TurnAngles
 	public static final double GYRO_KI_CAP = 0.05;
+
+	//PID Stuff
+
+	public static final double WHEEL_DIAMETER = 6; //inches
+	public static final double CONTROLLER_CONSTANT_L = 2225/WHEEL_DIAMETER*Math.PI; 
+	public static final double CONTROLLER_CONSTANT_R = 2225/WHEEL_DIAMETER*Math.PI; 
+	
 }

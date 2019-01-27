@@ -24,35 +24,39 @@ public class TurnAngle extends Command implements RobotMap{
         // eg. requires(chassis);
       requires(Robot.dt);
       requires(Robot.vs);
-      this.targetAngle = 15;
+      this.targetAngle = 5;
     	//this.targetAngle = target;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	//Robot.dt.setLowGear();
-    	Robot.dt.resetPosition();
+      Robot.dt.resetPosition();
     	Robot.dt.resetGyro();
     	Robot.dt.resetTurnAngleIntegral();
     	Robot.dt.resetTime();
       Robot.dt.startTime();
-      Robot.dt.turnAngle(targetAngle);
+      while(Math.abs(Robot.dt.getGyro().getYaw()) > 0.1){
+        System.err.println("The reset method lies");
+        Robot.dt.resetGyro();
+      }
 
     	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+      Robot.dt.turnAngle(targetAngle);
     //this.targetAngle = Robot.vs.angleindegrees;
 		//time for the ghetto isFinished()
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-      System.out.println("Gyro Yaw is: " + Robot.dt.getGyro().getYaw() + " and the target angle is: " + targetAngle);
+      //System.out.println("Gyro Yaw is: " + Robot.dt.getGyro().getYaw() + " and the target angle is: " + targetAngle);
     	if ((Math.abs(Robot.dt.getGyro().getYaw() - targetAngle) < GYRO_TOLERANCE)) {
 			//Robot.dt.turnAngleCheck(targetAngle);
-			return true;
+		  	return true;
 		}
     	return false;
     	

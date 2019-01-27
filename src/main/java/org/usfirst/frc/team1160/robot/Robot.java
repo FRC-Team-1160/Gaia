@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import org.usfirst.frc.team1160.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1160.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team1160.robot.subsystems.PID;
 import org.usfirst.frc.team1160.robot.subsystems.Testbed;
 import org.usfirst.frc.team1160.robot.subsystems.Vision;
 
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot implements RobotMap{
 	public static DriveTrain dt;
 	public static Testbed tb;
 	public static Vision vs;
+	public static PID pid;
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -43,6 +45,7 @@ public class Robot extends TimedRobot implements RobotMap{
 		dt = DriveTrain.getInstance();
 		tb = Testbed.getInstance();
 		vs = Vision.getInstance();
+		pid = PID.getInstance(dt.getLeftMaster(), dt.getRightMaster());
 		oi = OI.getInstance();
 	}
 

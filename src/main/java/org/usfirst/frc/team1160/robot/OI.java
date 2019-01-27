@@ -15,6 +15,7 @@ import org.usfirst.frc.team1160.robot.commands.Testbed.ExtendPiston;
 import org.usfirst.frc.team1160.robot.commands.Testbed.RetractPiston;
 import org.usfirst.frc.team1160.robot.commands.drive.*;
 import org.usfirst.frc.team1160.robot.commands.vision.runVision;
+import org.usfirst.frc.team1160.robot.commands.Auto.DriveForward;
 import org.usfirst.frc.team1160.robot.commands.Auto.TurnAngle;
 
 
@@ -58,7 +59,9 @@ public class OI implements RobotMap{
 		//climberUp.whileHeld(new Climb(-1));
 		runVision.whenPressed(new runVision());
 		//System.out.println("The angle is: " + Robot.vs.angleindegrees);
-		turnToVisionAngle.whenPressed(new TurnAngle(Robot.vs.angleindegrees));
+		//turnToVisionAngle.whenPressed(new TurnAngle(Robot.vs.angleindegrees));
+
+		turnToVisionAngle.whenPressed(new DriveForward(24));
 		setOn.whenPressed(new setOn());
 		setOff.whenPressed(new setOff());
 		extendPiston.whenPressed(new ExtendPiston());

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Talon;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -93,6 +94,14 @@ public class DriveTrain extends Subsystem implements RobotMap {
 //		SmartDashboard.putNumber("Accel Z", gyro.getWorldLinearAccelZ());
 	}
 
+	public WPI_TalonSRX getLeftMaster(){
+		return backLeft;
+	}
+
+	public WPI_TalonSRX getRightMaster(){
+		return backRight;
+	}
+
 	public void setPercentOutput(double percentOutput) {
 		backLeft.set(ControlMode.PercentOutput, -1 * percentOutput);
 		backRight.set(ControlMode.PercentOutput, percentOutput);
@@ -117,21 +126,22 @@ public class DriveTrain extends Subsystem implements RobotMap {
 	}
 
 	public void turnAngle(double targetAngle) { //ghetto PID with the navX sensor 
-		double current_angle = gyro.getYaw() + 0.1;
+		double current_angle = gyro.getYaw();
 		angle_difference_now = Math.abs(targetAngle - current_angle);
 		SmartDashboard.putNumber("Yaw", gyro.getYaw());
 		proportion = GYRO_KP_2 * angle_difference;
  		deltaTime = getTime();
- 		//derivative = GYRO_KD * (angle_difference_now - angle_difference)/deltaTime;
- 		//if (Math.abs(angle_difference_now) < 15) {
- 		//integral += GYRO_KI*deltaTime*(angle_difference_now);
+ 		derivative = 0;//GYRO_KD * (angle_difference_now - angle_difference)/deltaTime;
+ 		if (Math.abs(angle_difference_now) < 15) {
+		 integral += GYRO_KI*deltaTime*(angle_difference_now);
+		 }
 		if(integral > GYRO_KI_CAP) {
-			
 			integral = GYRO_KI_CAP;
 		}
-		derivative = 0;
+
 		integral = 0;
-		 //}
+		System.out.println("The angle difference is:\t " + angle_difference + "\t and the angle differenece now is: " + angle_difference_now);
+
  		angle_difference = angle_difference_now;
  		
  		//SmartDashboard.putNumber("turnAngle PercentOutput input", proportion+derivative+integral);
@@ -141,11 +151,11 @@ public class DriveTrain extends Subsystem implements RobotMap {
 		SmartDashboard.putNumber("P", proportion);
 		SmartDashboard.putNumber("I", integral);
 		SmartDashboard.putNumber("D", derivative);
-		 
+		
 		// if (proportion+derivative+integral <= GYRO_CAP) {
 			// if(targetAngle > 0){
-				backLeft.set(ControlMode.PercentOutput, -1*(proportion+derivative+integral));
-	 		    backRight.set(ControlMode.PercentOutput, -1*rightSideBoost*(proportion+derivative+integral));
+		backLeft.set(ControlMode.PercentOutput, -1*(proportion+derivative+integral));
+	 	backRight.set(ControlMode.PercentOutput, -1*rightSideBoost*(proportion+derivative+integral));
 			 //}//else{
 			//	backLeft.set(ControlMode.PercentOutput, (proportion+derivative+integral));
 			//	backRight.set(ControlMode.PercentOutput, rightSideBoost*(proportion+derivative+integral));
