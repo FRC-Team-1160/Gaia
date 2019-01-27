@@ -84,10 +84,15 @@ public class DriveTrain extends Subsystem implements RobotMap {
 		middleRight.follow(backRight);
 	}
 	public void manualDrive(){
+		
 		backLeft.set(ControlMode.PercentOutput, 0.8*(Math.pow(-(Robot.oi.getMainstick().getZ() - Robot.oi.getMainstick().getY()), 1)));
 		backRight.set(ControlMode.PercentOutput, 0.8*(Math.pow(-(Robot.oi.getMainstick().getZ() + Robot.oi.getMainstick().getY()), 1)));
 		SmartDashboard.putNumber("Yaw", gyro.getYaw());
-
+		SmartDashboard.putNumber("Back Left Encoder", backLeft.getSelectedSensorPosition());
+		SmartDashboard.putNumber("Back Right Encoder", backRight.getSelectedSensorPosition());
+		SmartDashboard.putNumber("Middle Left Encoder", middleLeft.getSelectedSensorPosition());
+		SmartDashboard.putNumber("Middle Right Encoder", middleRight.getSelectedSensorPosition());
+		
 //		SmartDashboard.putNumber("Angle", gyro.getAngle());
 //		SmartDashboard.putNumber("Accel X", gyro.getWorldLinearAccelX());
 //		SmartDashboard.putNumber("Accel Y", gyro.getWorldLinearAccelY());
@@ -100,6 +105,11 @@ public class DriveTrain extends Subsystem implements RobotMap {
 
 	public WPI_TalonSRX getRightMaster(){
 		return backRight;
+	}
+
+	public  void printEncoder(){
+		System.out.println("Left encoder" + backLeft.getSelectedSensorPosition());
+		System.out.println("Right encoder" + backRight.getSelectedSensorPosition());
 	}
 
 	public void setPercentOutput(double percentOutput) {

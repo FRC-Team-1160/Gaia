@@ -19,12 +19,14 @@ public interface RobotMap {
 	 */
 
 	public static final double _0_023 = 0.023;
+	//purposly naenaed the port assignments cuz too lazy to get enconder values from the right talon by what talon we pull values from
+
 	public static int DT_LEFT_1 = 1; // Ports
-	public static int DT_LEFT_2 = 2;
+	public static int DT_LEFT_2 = 8;
 	public static int DT_LEFT_3 = 3;
 	public static int DT_RIGHT_1 = 4;
-	public static int DT_RIGHT_2 = 5;
-	public static int DT_RIGHT_3 = 6;
+	public static int DT_RIGHT_2 = 6;
+	public static int DT_RIGHT_3 = 5;
 	public static int PCM = 10;
 	public static final int DT_SOLENOID_0 = 0;
 	public static final int DT_SOLENOID_1 = 7;

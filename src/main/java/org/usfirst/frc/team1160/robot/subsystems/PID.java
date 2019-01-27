@@ -44,6 +44,7 @@ public class PID extends Subsystem implements RobotMap{
 	}
 	
 	public void goDistance(double distance) {
+
 		leftController.set(ControlMode.Position,-1*(distance*RobotMap.CONTROLLER_CONSTANT_L));
 		rightController.set(ControlMode.Position,(distance*RobotMap.CONTROLLER_CONSTANT_R));
 	}

@@ -61,7 +61,7 @@ public class OI implements RobotMap{
 		//System.out.println("The angle is: " + Robot.vs.angleindegrees);
 		//turnToVisionAngle.whenPressed(new TurnAngle(Robot.vs.angleindegrees));
 
-		turnToVisionAngle.whenPressed(new DriveForward(24));
+		turnToVisionAngle.whenPressed(new DriveForward(12));
 		setOn.whenPressed(new setOn());
 		setOff.whenPressed(new setOff());
 		extendPiston.whenPressed(new ExtendPiston());
