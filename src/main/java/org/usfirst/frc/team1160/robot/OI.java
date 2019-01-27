@@ -18,6 +18,9 @@ import org.usfirst.frc.team1160.robot.commands.Belt.BeltReverse;
 import org.usfirst.frc.team1160.robot.commands.drive.*;
 import org.usfirst.frc.team1160.robot.commands.Lift.LiftUp;
 import org.usfirst.frc.team1160.robot.commands.Lift.LiftDown;
+import org.usfirst.frc.team1160.robot.commands.Arm.ArmIntake;
+import org.usfirst.frc.team1160.robot.commands.Arm.ArmOutput;
+//import org.usfirst.frc.team1160.robot.commands.Arm.ToggleSolenoid;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -26,7 +29,7 @@ import org.usfirst.frc.team1160.robot.commands.Lift.LiftDown;
 public class OI implements RobotMap{
 	private static OI instance;
 	Joystick mainStick;
-	JoystickButton climberUp, climberDown, setOn, setOff,extendPiston,retractPiston, beltForward, beltReverse, liftUp, liftDown;
+	JoystickButton climberUp, climberDown, setOn, setOff,extendPiston,retractPiston, beltForward, beltReverse, liftUp, liftDown, armToggle, armIntake, armOutput;
 	
 	public static OI getInstance() {
 		if(instance == null) {
@@ -46,12 +49,15 @@ public class OI implements RobotMap{
 		climberDown = new JoystickButton(mainStick, 2);
 		setOn = new JoystickButton(mainStick, 3);
 		setOff = new JoystickButton(mainStick, 4);
-		//extendPiston = new JoystickButton(mainStick,6);
-		//retractPiston = new JoystickButton(mainStick,5);
+		//extendPiston = new JoystickButton(mainStick,7);
+		//retractPiston = new JoystickButton(mainStick,8);
 		liftUp = new JoystickButton(mainStick, 5);
 		liftDown = new JoystickButton(mainStick, 6);
-		beltForward = new JoystickButton(mainStick, 7);
-		beltReverse = new JoystickButton(mainStick, 8);
+		//armToggle =  new JoystickButton(mainStick, 4);
+		//armIntake = new JoystickButton(mainStick, 7);
+		//armOutput = new JoystickButton(mainStick, 8);
+		//beltForward = new JoystickButton(mainStick, 7);
+		//beltReverse = new JoystickButton(mainStick, 8);
 		System.out.println("Hello");
 		tieButtons();
 	}
@@ -64,8 +70,11 @@ public class OI implements RobotMap{
 		setOff.whenPressed(new setOff());
 		//extendPiston.whenPressed(new ExtendPiston());
 		//retractPiston.whenPressed(new RetractPiston());
-		beltForward.whileHeld(new BeltForward());
-		beltReverse.whileHeld(new BeltReverse());
+		//armToggle.whenPressed(new ToggleSolenoid());
+		//armIntake.whileHeld(new ArmIntake());
+		//armOutput.whileHeld(new ArmOutput());
+		//beltForward.whileHeld(new BeltForward());
+		//beltReverse.whileHeld(new BeltReverse());
 		liftUp.whileHeld(new LiftUp());
 		liftDown.whileHeld(new LiftDown());
 	}

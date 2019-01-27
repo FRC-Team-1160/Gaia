@@ -57,7 +57,7 @@ public class DriveTrain extends Subsystem implements RobotMap{
 		frontRight = new WPI_VictorSPX(DT_RIGHT_1);
 		middleRight = new WPI_TalonSRX(DT_RIGHT_2);
 		backRight = new WPI_TalonSRX(DT_RIGHT_3);
-		driveSwitch = new DoubleSolenoid(PCM, DT_SOLENOID_0, DT_SOLENOID_1);
+		driveSwitch = new DoubleSolenoid(10,0,7);
 		gyro = new AHRS(Port.kMXP);
 		NetworkTableInstance inst = NetworkTableInstance.getDefault();
 		table = inst.getTable("datatable");

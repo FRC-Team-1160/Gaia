@@ -20,6 +20,7 @@ public class BeltForward extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.bt.setForward();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -44,5 +45,6 @@ public class BeltForward extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.bt.Stop();
   }
 }

@@ -20,6 +20,7 @@ public class LiftDown extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.lt.setDown();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -44,5 +45,6 @@ public class LiftDown extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.lt.Stop();
   }
 }

@@ -14,7 +14,7 @@ import org.usfirst.frc.team1160.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class Lift extends Subsystem {
+public class Lift extends Subsystem implements RobotMap{
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private static Lift instance;
@@ -30,18 +30,19 @@ public class Lift extends Subsystem {
   }
 
   private Lift(){
-    leftTalon = new WPI_TalonSRX(RobotMap.LIFT_LEFT);
-    rightTalon = new WPI_TalonSRX(RobotMap.LIFT_RIGHT);
+    leftTalon = new WPI_TalonSRX(LIFT_LEFT);
+    rightTalon = new WPI_TalonSRX(LIFT_RIGHT);
   }
 
   public void setUp(){  
-    leftTalon.set(1);
-    rightTalon.set(1);
+    
+    leftTalon.set(0.25);
+    rightTalon.set(0.25);
   }
 
   public void setDown(){
-    leftTalon.set(-1);
-    rightTalon.set(-1);
+    leftTalon.set(-0.25);
+    rightTalon.set(-0.25);
   }
 
   public void Stop(){

@@ -5,46 +5,43 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team1160.robot.commands.Belt;
+/*package org.usfirst.frc.team1160.robot.commands.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1160.robot.Robot;
 
-public class BeltReverse extends Command {
-  public BeltReverse() {
+public class ToggleSolenoid extends Command {
+  public ToggleSolenoid() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.bt);
+    requires(Robot.am);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.bt.setReverse();
+    Robot.am.toggle();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.bt.setReverse();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.bt.Stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.bt.Stop();
   }
-}
+}*/

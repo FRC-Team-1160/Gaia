@@ -21,11 +21,17 @@ public interface RobotMap {
 	public static int DT_RIGHT_2 = 5;
 	public static int DT_RIGHT_3 = 6;
 	public static int PCM = 10;
-	public static int BELT = 8;
-	public static int LIFT_LEFT = 0;//temporary
-	public static int LIFT_RIGHT = 0;//temporary
+	public static int BELT = 0;//temporary
+	public static int LIFT_LEFT = 7;//temporary
+	public static int LIFT_RIGHT = 8;//temporary
+	public static int ARM_LEFT = 9;
+	public static int ARM_RIGHT = 10;
+
 	public static final int DT_SOLENOID_0 = 0;
 	public static final int DT_SOLENOID_1 = 7;
+	public static final int PISTON_SOLENOID_1 = 1;
+	public static final int PISTON_SOLENOID_2 = 6;
+	//public static final int ARM_SOLENOID = 2;//temporary
 
 
 }

@@ -19,6 +19,7 @@ import org.usfirst.frc.team1160.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1160.robot.subsystems.Testbed;
 import org.usfirst.frc.team1160.robot.subsystems.Belt;
 import org.usfirst.frc.team1160.robot.subsystems.Lift;
+import org.usfirst.frc.team1160.robot.subsystems.Arm;
 
 
 /**
@@ -36,6 +37,7 @@ public class Robot extends TimedRobot implements RobotMap{
 	public static Testbed tb;
 	public static Belt bt;
 	public static Lift lt;
+	public static Arm am;
 	public static NetworkTable table;
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -50,9 +52,10 @@ public class Robot extends TimedRobot implements RobotMap{
 	public void robotInit() {
 		dt = DriveTrain.getInstance();
 		tb = Testbed.getInstance();
-		oi = OI.getInstance();
 		bt = Belt.getInstance();
 		lt = Lift.getInstance();
+		am = Arm.getInstance();
+		oi = OI.getInstance();
 		NetworkTableInstance inst = NetworkTableInstance.getDefault();
 		table = inst.getTable("datatable");
 		xEntry = table.getEntry("X");
