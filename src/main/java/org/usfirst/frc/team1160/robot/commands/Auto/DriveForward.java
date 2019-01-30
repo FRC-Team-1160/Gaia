@@ -24,7 +24,15 @@ public class DriveForward extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    Robot.dt.resetPosition();
+    Robot.dt.resetGyro();
+    Robot.dt.resetTurnAngleIntegral();
+    Robot.dt.resetTime();
+    Robot.dt.startTime();
+    while(Math.abs(Robot.dt.getLeftMaster().getSelectedSensorPosition()) > 0.1 || Robot.dt.getRightMaster().getSelectedSensorPosition() > 0.1){
+      System.err.println("The reset method lies");
+      Robot.dt.resetPosition();
+    }
     Robot.pid.goDistance(distance);
   }
 
