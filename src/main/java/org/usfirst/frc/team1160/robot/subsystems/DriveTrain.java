@@ -92,6 +92,7 @@ public class DriveTrain extends Subsystem implements RobotMap {
 		SmartDashboard.putNumber("Back Right Encoder", backRight.getSelectedSensorPosition());
 		SmartDashboard.putNumber("Middle Left Encoder", middleLeft.getSelectedSensorPosition());
 		SmartDashboard.putNumber("Middle Right Encoder", middleRight.getSelectedSensorPosition());
+		printEncoder();
 		
 //		SmartDashboard.putNumber("Angle", gyro.getAngle());
 //		SmartDashboard.putNumber("Accel X", gyro.getWorldLinearAccelX());
