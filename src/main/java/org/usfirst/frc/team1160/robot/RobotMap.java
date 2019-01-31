@@ -42,7 +42,7 @@ public interface RobotMap {
 	//PID Stuff
 
 	public static final double WHEEL_DIAMETER = 6; //inches
-	public static final double CONTROLLER_CONSTANT_L = 2225/WHEEL_DIAMETER*Math.PI; 
-	public static final double CONTROLLER_CONSTANT_R = 2225/WHEEL_DIAMETER*Math.PI; 
+	public static final double CONTROLLER_CONSTANT_L = 2355/(WHEEL_DIAMETER*Math.PI); 
+	public static final double CONTROLLER_CONSTANT_R = 2355/(WHEEL_DIAMETER*Math.PI); 
 	
 }

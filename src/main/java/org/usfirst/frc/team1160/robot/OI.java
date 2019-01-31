@@ -16,6 +16,7 @@ import org.usfirst.frc.team1160.robot.commands.Testbed.RetractPiston;
 import org.usfirst.frc.team1160.robot.commands.drive.*;
 import org.usfirst.frc.team1160.robot.commands.vision.runVision;
 import org.usfirst.frc.team1160.robot.commands.Auto.DriveForward;
+import org.usfirst.frc.team1160.robot.commands.Auto.FullAuto;
 import org.usfirst.frc.team1160.robot.commands.Auto.TurnAngle;
 import org.usfirst.frc.team1160.robot.commands.Auto.DriveForward;
 
@@ -63,13 +64,13 @@ public class OI implements RobotMap{
 		//System.out.println("The angle is: " + Robot.vs.angleindegrees);
 		//turnToVisionAngle.whenPressed(new TurnAngle(Robot.vs.angleindegrees));
 
-		turnToVisionAngle.whenPressed(new DriveForward(12));
+		turnToVisionAngle.whenPressed(new TurnAngle(15));
 		setOn.whenPressed(new setOn());
 		setOff.whenPressed(new setOff());
 		extendPiston.whenPressed(new ExtendPiston());
 		retractPiston.whenPressed(new RetractPiston());
 		button_ResetYaw.whenPressed(new resetYaw());
-		goDistance.whenPressed(new DriveForward(10));	
+		goDistance.whenPressed(new FullAuto());	
 	}
 	
 	public Joystick getMainstick() {
