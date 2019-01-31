@@ -14,17 +14,19 @@ public class FullAuto extends CommandGroup {
    * Add your docs here.
    */
   public FullAuto() {
-    addSequential(new TurnAngle(15));
+    addSequential(new DriveForward(8));
 
     addSequential(new TurnAngle(15));
 
-    addSequential(new TurnAngle(15));
+    //addSequential(new TurnAngle(15));
 
-    addSequential(new TurnAngle(15));
+    //addSequential(new TurnAngle(15));
 
-    addSequential(new TurnAngle(15));
+    //addSequential(new TurnAngle(15));
 
-    addSequential(new TurnAngle(15));
+    //addSequential(new TurnAngle(15));
+
+    //addSequential(new TurnAngle(15));
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

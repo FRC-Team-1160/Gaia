@@ -33,10 +33,10 @@ public class PID extends Subsystem implements RobotMap{
     	rightController.configAllowableClosedloopError(0, 75, 0);
 
 		leftController.config_kP(0, .5005, 0);
-		leftController.config_kI(0, 0.00, 0);
+		leftController.config_kI(0, 0.0001, 0);
 		leftController.config_kD(0, -0.05, 0);
 		rightController.config_kP(0, 0.5, 0);
-		rightController.config_kI(0, 0.00, 0);
+		rightController.config_kI(0, 0.0001, 0);
     	rightController.config_kD(0, -0.05, 0);
 	}
 	
@@ -53,7 +53,7 @@ public class PID extends Subsystem implements RobotMap{
 		SmartDashboard.putNumber("Back Left Error", leftController.getClosedLoopError());
 		SmartDashboard.putNumber("Back Right Error", rightController.getClosedLoopError());
 	
-		leftController.set(ControlMode.Position,-1*(targetDistance*RobotMap.CONTROLLER_CONSTANT_L));
+		leftController.set(ControlMode.Position, -1*(targetDistance*RobotMap.CONTROLLER_CONSTANT_L));
 		rightController.set(ControlMode.Position,(targetDistance*RobotMap.CONTROLLER_CONSTANT_R));
  	}
 	
