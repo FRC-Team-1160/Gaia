@@ -27,6 +27,8 @@ public class Vision extends Subsystem {
 	public Mat matrix;
 	public CvSink camera;
 	public double angleindegrees;
+	
+	public double distanceToTarget;
 	private Vision() {
 		cs = CameraServer.getInstance();
 		gp = new GripPipeline();
@@ -34,6 +36,8 @@ public class Vision extends Subsystem {
 		cs.addServer("axis");
 		camera = cs.getVideo();
 		matrix = new Mat();
+		angleindegrees = 0;
+		distanceToTarget = 0;
 		//camera.grabFrame(matrix);
 		/*
 		for(Point p: Points) {
@@ -139,7 +143,12 @@ public class Vision extends Subsystem {
 
 
 			System.out.println("The angle is: " + turnAngle);
+			System.out.println("The Distance is: " + turnDistancein);
 			angleindegrees = turnAngle;
+			distanceToTarget = turnDistancein;
+			angleindegrees = turnAngle;
+			distanceToTarget = turnDistancein;
+
 
 			//System.out.println("The pixel height is: " + height1);
 			//System.out.println("The robot is: " + distance + "inches from the tape");

@@ -138,7 +138,7 @@ public class DriveTrain extends Subsystem implements RobotMap {
 
 	public void turnAngle(double targetAngle) { //ghetto PID with the navX sensor 
 		double current_angle = gyro.getYaw();
-		angle_difference_now = Math.abs(targetAngle - current_angle);
+		angle_difference_now = (targetAngle - current_angle);
 		SmartDashboard.putNumber("Yaw", gyro.getYaw());
 		proportion = GYRO_KP_2 * angle_difference;
  		deltaTime = getTime();
