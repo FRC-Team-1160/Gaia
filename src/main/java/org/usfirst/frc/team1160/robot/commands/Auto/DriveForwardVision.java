@@ -11,9 +11,9 @@ import org.usfirst.frc.team1160.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveForward extends Command {
+public class DriveForwardVision extends Command {
   private double distance;
-  public DriveForward(double d) {
+  public DriveForwardVision(double d) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.pid);
@@ -25,7 +25,7 @@ public class DriveForward extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    System.out.println("The distance is: "+distance);
+    //System.out.println("The distance is: "+distance);
     Robot.dt.resetPosition();
     Robot.dt.resetGyro();
     Robot.dt.resetTurnAngleIntegral();
@@ -36,7 +36,7 @@ public class DriveForward extends Command {
       Robot.dt.resetPosition();
     }
     //System.out.println("Im Stupid");
-    Robot.pid.goDistance(distance*.90);
+    Robot.pid.goDistance(Robot.vs.distanceToTarget*.90);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -52,7 +52,7 @@ public class DriveForward extends Command {
   
       return true;
     }
-    System.out.println("Im a driving cuck");
+    //System.out.println("Im a driving cuck");
 
     return false;
   }

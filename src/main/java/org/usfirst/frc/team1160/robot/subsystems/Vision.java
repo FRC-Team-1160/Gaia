@@ -26,9 +26,9 @@ public class Vision extends Subsystem {
 	Point[] Points2;
 	public Mat matrix;
 	public CvSink camera;
-	public double angleindegrees;
-	
-	public double distanceToTarget;
+
+	public static double angleindegrees;
+	public static double distanceToTarget;
 	private Vision() {
 		cs = CameraServer.getInstance();
 		gp = new GripPipeline();
@@ -122,7 +122,7 @@ public class Vision extends Subsystem {
 			double cameraCenter = 320/2;
 
 			double turnDistancePX = Math.abs(cameraCenter-midpointX);
-			double turnDistancein = (turnDistancePX*14.311)/distanceX;
+			double turnDistancein = (turnDistancePX*14.311)/(2*distanceX);
 			double LorR = 0;
 			if(midpointX > cameraCenter){
 				LorR = 1;
@@ -143,11 +143,9 @@ public class Vision extends Subsystem {
 
 
 			System.out.println("The angle is: " + turnAngle);
-			System.out.println("The Distance is: " + turnDistancein);
+			System.out.println("The Distance is: " + midPointHeight);
 			angleindegrees = turnAngle;
-			distanceToTarget = turnDistancein;
-			angleindegrees = turnAngle;
-			distanceToTarget = turnDistancein;
+			distanceToTarget = midPointHeight;
 
 
 			//System.out.println("The pixel height is: " + height1);
@@ -161,6 +159,11 @@ public class Vision extends Subsystem {
 		}
 		
 		
+	}
+
+	public void resetVision(){
+		angleindegrees = 0;
+		distanceToTarget = 0;
 	}
 	
     public void initDefaultCommand() {

@@ -2,20 +2,20 @@ package org.usfirst.frc.team1160.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import org.usfirst.frc.team1160.robot.RobotMap;
 /**
  *
  */
-public class Testbed extends Subsystem {
+public class Testbed extends Subsystem implements RobotMap{
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	private static Testbed instance;
-	//private DoubleSolenoid piston;
+	private DoubleSolenoid piston;
 	
 	private Testbed(){
 		
-		//piston = new DoubleSolenoid(1,6);
+		piston = new DoubleSolenoid(PCM,1, 6);
 		
 	}
 	
@@ -33,11 +33,10 @@ public class Testbed extends Subsystem {
     }
     
     public void extendPiston(){
-    	//piston.set(DoubleSolenoid.Value.kForward);
+    	piston.set(DoubleSolenoid.Value.kForward);
     }
     
     public void retractPiston(){
-    	//piston.set(DoubleSolenoid.Value.kReverse);
+    	piston.set(DoubleSolenoid.Value.kReverse);
     }
 }
-

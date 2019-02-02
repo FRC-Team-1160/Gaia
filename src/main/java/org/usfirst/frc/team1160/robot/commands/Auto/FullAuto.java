@@ -8,6 +8,7 @@
 package org.usfirst.frc.team1160.robot.commands.Auto;
 
 import org.usfirst.frc.team1160.robot.commands.vision.*;
+import org.usfirst.frc.team1160.robot.commands.Testbed.*;
 import org.usfirst.frc.team1160.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -19,16 +20,15 @@ public class FullAuto extends CommandGroup {
   public FullAuto() {
     requires(Robot.vs);
 
-    //addSequential(new runVision());
-
-    //addSequential(new TurnAngle(Robot.vs.angleindegrees));
-
-    //addSequential(new DriveForward(Robot.vs.distanceToTarget));
-
-    addSequential(new TurnAngle(10));
-
-    addSequential(new DriveForward(10));
     
+    addSequential(new runVision());
+    addSequential(new TurnAngle(Robot.vs.angleindegrees));
+    addSequential(new DriveForwardVision(Robot.vs.distanceToTarget-2));
+    addSequential(new ExtendPiston());
+    //addSequential(new DriveForward(-10));
+    //addSequential(new RetractPiston());
+
+   
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

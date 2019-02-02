@@ -109,8 +109,8 @@ public class DriveTrain extends Subsystem implements RobotMap {
 	}
 
 	public  void printEncoder(){
-		System.out.println("Left encoder" + backLeft.getSelectedSensorPosition());
-		System.out.println("Right encoder" + backRight.getSelectedSensorPosition());
+		//System.out.println("Left encoder" + backLeft.getSelectedSensorPosition());
+		//System.out.println("Right encoder" + backRight.getSelectedSensorPosition());
 	}
 
 	public void setPercentOutput(double percentOutput) {
@@ -151,7 +151,7 @@ public class DriveTrain extends Subsystem implements RobotMap {
 		}
 
 		integral = 0;
-		System.out.println("The angle difference is:\t " + angle_difference + "\t and the angle differenece now is: " + angle_difference_now);
+		//System.out.println("The angle difference is:\t " + angle_difference + "\t and the angle differenece now is: " + angle_difference_now);
 
  		angle_difference = angle_difference_now;
  		

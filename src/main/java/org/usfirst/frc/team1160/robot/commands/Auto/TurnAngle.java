@@ -24,7 +24,7 @@ public class TurnAngle extends Command implements RobotMap{
         // eg. requires(chassis);
       requires(Robot.dt);
       requires(Robot.vs);
-      this.targetAngle = target;
+      this.targetAngle = Robot.vs.angleindegrees;
     	//this.targetAngle = target;
     }
 
@@ -36,10 +36,12 @@ public class TurnAngle extends Command implements RobotMap{
     	Robot.dt.resetTurnAngleIntegral();
     	Robot.dt.resetTime();
       Robot.dt.startTime();
-      while(Math.abs(Robot.dt.getGyro().getYaw()) > 0.1){
-        System.err.println("The reset method lies");
-        Robot.dt.resetGyro();
-      }
+      //while(Math.abs(Robot.dt.getGyro().getYaw()) > 0.1){
+        //System.err.println("The reset method lies");
+        //Robot.dt.resetGyro();
+      
+      this.targetAngle = Robot.vs.angleindegrees + Robot.dt.getGyro().getYaw();
+      
 
     	
     }
@@ -56,8 +58,10 @@ public class TurnAngle extends Command implements RobotMap{
       //System.out.println("Gyro Yaw is: " + Robot.dt.getGyro().getYaw() + " and the target angle is: " + targetAngle);
     	if ((Math.abs(Robot.dt.getGyro().getYaw() - targetAngle) < GYRO_TOLERANCE)) {
 			//Robot.dt.turnAngleCheck(targetAngle);
-		  	return true;
-		}
+        System.out.println("Im a turning faggot");
+        return true;
+    }
+      System.out.println("Im a turning cuck");
     	return false;
     	
     }
@@ -71,6 +75,6 @@ public class TurnAngle extends Command implements RobotMap{
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.dt.setPercentOutput(0);
+    	//Robot.dt.setPercentOutput(0);
     }
 }
