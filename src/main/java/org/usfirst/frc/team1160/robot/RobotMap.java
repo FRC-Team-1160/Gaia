@@ -30,8 +30,8 @@ public interface RobotMap {
 	public static int PCM = 10;
 	public static final int DT_SOLENOID_0 = 0;
 	public static final int DT_SOLENOID_1 = 7;
-	public static final double GYRO_KP_2 = 0.025; //TurnAngle
-	public static final double GYRO_KI = 0.0005;
+	public static final double GYRO_KP_2 = 0.04; //TurnAngle
+	public static final double GYRO_KI = 0.01;
 	public static final double GYRO_KD = 0.000001; //0.01 * (-1.0/80.0);//TURN ANGLE KP
 	public static final double GYRO_TOLERANCE = 3;				//Smaller value means higher accuracy but more time spent
 	public static final double TURN_TIMEOUT = 2.5;
@@ -42,7 +42,11 @@ public interface RobotMap {
 	//PID Stuff
 
 	public static final double WHEEL_DIAMETER = 6; //inches
-	public static final double CONTROLLER_CONSTANT_L = 2355/(WHEEL_DIAMETER*Math.PI); 
-	public static final double CONTROLLER_CONSTANT_R = 2355/(WHEEL_DIAMETER*Math.PI); 
+	public static final double CONTROLLER_CONSTANT_L = 2225/WHEEL_DIAMETER*Math.PI; 
+	public static final double CONTROLLER_CONSTANT_R = 2225/WHEEL_DIAMETER*Math.PI; 
+
+	public static final double GYRO_DKP = 0.04; //drivePID; add left and right side?
+	public static final double GYRO_DKI = 0.01;
+	public static final double GYRO_DKD = 0.000001;
 	
 }
