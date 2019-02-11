@@ -6,15 +6,18 @@
 /*----------------------------------------------------------------------------*/
 
 package org.usfirst.frc.team1160.robot.subsystems;
+import org.usfirst.frc.team1160.robot.Robot;
 import java.net.*;
 import java.util.Timer;
 import java.io.*; 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.AnalogAccelerometer;
 
 /**
  * Add your docs here.
  */
-public class Minimap extends Subsystem {
+public class Minimap extends Subsystem{
 
   public static Minimap instance;
   public Minimap(){
@@ -27,23 +30,27 @@ public class Minimap extends Subsystem {
     return instance;
   }
 
-  static double f(double x) {
-    return Math.exp(- x * x / 2) / Math.sqrt(2 * Math.PI);
-  }
-
 /**********************************************************************
- * Integrate f from a to b using the trapezoidal rule.
- * Increase N for more precision.
+ * Finds a new position by integrating acceleration (multiply accel by time twice)
+ * Still needs: find old position, find new position by updating it 
  **********************************************************************/
- static double integrate(double a, double b, int N) {
-    double h = (b - a) / N;              // step size
-    double sum = 0.5 * (f(a) + f(b));    // area
-    for (int i = 1; i < N; i++) {
-       double x = a + h * i;
-       sum = sum + f(x);
-    }
+ static double[] updatePosition() { //rename once more specifically known
+    Robot.dt.startTime();
+    double timeValue = Robot.dt.getTime();
+    BuiltInAccelerometer accel = new BuiltInAccelerometer();
+    double xValue = accel.getX();
+    double yValue = accel.getY();
+    double zValue = accel.getZ();
 
-    return sum * h;
+    double changeXPosition = xValue * timeValue * timeValue;
+    double changeYPosition = yValue * timeValue * timeValue;
+    double changeZPosition = zValue * timeValue * timeValue;
+
+    double coordinates[] = new double[3]; 
+    coordinates[0] = changeXPosition;
+    coordinates[1] = changeYPosition;
+    coordinates[2] = changeZPosition;
+    return coordinates;
   }
     public static void main(String args[]) throws IOException 
     { 
@@ -72,8 +79,6 @@ public class Minimap extends Subsystem {
         float xDis = 50, yDis = 70, angle = 45;
         while (j < 9999999)
         {
-	        
-	        
 	        long time = System.currentTimeMillis();
 	        while (System.currentTimeMillis() - time < 1000) {}
 	        out.writeBytes(xDis + " " + yDis + " " + angle + "\n");
@@ -93,7 +98,6 @@ public class Minimap extends Subsystem {
             System.out.println(i); 
         } 
     } 
-} 
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
