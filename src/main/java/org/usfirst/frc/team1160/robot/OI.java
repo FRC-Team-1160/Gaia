@@ -15,10 +15,10 @@ import org.usfirst.frc.team1160.robot.commands.Testbed.ExtendPiston;
 import org.usfirst.frc.team1160.robot.commands.Testbed.RetractPiston;
 import org.usfirst.frc.team1160.robot.commands.drive.*;
 import org.usfirst.frc.team1160.robot.commands.vision.runVision;
-import org.usfirst.frc.team1160.robot.commands.auto.DriveForward;
-import org.usfirst.frc.team1160.robot.commands.auto.FullAuto;
-import org.usfirst.frc.team1160.robot.commands.auto.TurnAngle;
-import org.usfirst.frc.team1160.robot.commands.auto.DriveForward;
+import org.usfirst.frc.team1160.robot.commands.Auto.DriveForward;
+import org.usfirst.frc.team1160.robot.commands.Auto.FullAuto;
+import org.usfirst.frc.team1160.robot.commands.Auto.TurnAngle;
+import org.usfirst.frc.team1160.robot.commands.Auto.DriveForward;
 
 
 /**
