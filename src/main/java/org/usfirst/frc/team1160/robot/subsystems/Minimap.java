@@ -18,9 +18,13 @@ import edu.wpi.first.wpilibj.AnalogAccelerometer;
  * Add your docs here.
  */
 public class Minimap extends Subsystem{
-
+    
   public static Minimap instance;
+  static double coordinates[] = new double[3];
   public Minimap(){
+    coordinates[0] = 0.0;
+    coordinates[1] = 0.0;
+    coordinates[2] = 0.0;
   }
 
   public Minimap getInstance(){
@@ -34,6 +38,10 @@ public class Minimap extends Subsystem{
  * Finds a new position by integrating acceleration (multiply accel by time twice)
  * Still needs: find old position, find new position by updating it 
  **********************************************************************/
+
+ //initialize the coordinate array
+ 
+
  static double[] updatePosition() { //rename once more specifically known
     Robot.dt.startTime();
     double timeValue = Robot.dt.getTime();
@@ -46,10 +54,9 @@ public class Minimap extends Subsystem{
     double changeYPosition = yValue * timeValue * timeValue;
     double changeZPosition = zValue * timeValue * timeValue;
 
-    double coordinates[] = new double[3]; 
-    coordinates[0] = changeXPosition;
-    coordinates[1] = changeYPosition;
-    coordinates[2] = changeZPosition;
+    coordinates[0] = coordinates[0] + changeXPosition;
+    coordinates[1] = coordinates[1] + changeYPosition;
+    coordinates[2] = coordinates[2] + changeZPosition;
     return coordinates;
   }
     public static void main(String args[]) throws IOException 
