@@ -36,24 +36,30 @@ public class Minimap extends Subsystem{
 
 /**********************************************************************
  * Finds a new position by integrating acceleration (multiply accel by time twice)
- * Still needs: find old position, find new position by updating it 
+ * Then it updates it to the coordinate array
+ * Still needs to confirm: ability to display 
  **********************************************************************/
 
  //initialize the coordinate array
  
 
- static double[] updatePosition() { //rename once more specifically known
+ static double[] updatePosition() { 
+    //begins the timer
     Robot.dt.startTime();
     double timeValue = Robot.dt.getTime();
+
+    //creates an instance of the accelerometer to get the accel values
     BuiltInAccelerometer accel = new BuiltInAccelerometer();
     double xValue = accel.getX();
     double yValue = accel.getY();
     double zValue = accel.getZ();
 
+    //multiply acceleration by time^2 to get position
     double changeXPosition = xValue * timeValue * timeValue;
     double changeYPosition = yValue * timeValue * timeValue;
     double changeZPosition = zValue * timeValue * timeValue;
 
+    //save position into the coordinates
     coordinates[0] = coordinates[0] + changeXPosition;
     coordinates[1] = coordinates[1] + changeYPosition;
     coordinates[2] = coordinates[2] + changeZPosition;
